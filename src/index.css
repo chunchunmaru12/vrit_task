@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --button-color: #fafafa;
+  --button-background-color: #1253ed;
+  --course-primary: #c33241;
+
+  --screen-max: 1240px;
+  --screen-lg: 960px;
+  --screen-md: 720px;
+  --screen-sm: 480px;
+}
+ 
+@font-face {
+  font-family: "Nohemi";
+  src: url("./assets/fonts/Nohemi-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nohemi";
+  src: url("./assets/fonts/Nohemi-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+ 
+@font-face {
+  font-family: "Nohemi";
+  src: url("./assets/fonts/Nohemi-ExtraBold.woff") format("woff");
+  font-weight: bolder;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Oakes";
+  src: url("./assets/fonts/Oakes-Grotesk-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Oakes";
+  src: url("./assets/fonts/Oakes-Grotesk-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100dvh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+.container {
+  max-width: var(--screen-max);
+  margin: 7rem auto;
+}
+
+@media (max-width: 1300px) {
+  .container {
+    max-width: var(--screen-lg);
+    margin: 5rem auto;
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    max-width: var(--screen-md);
+  }
+}
+
+@media (max-width: 760px) {
+  .container {
+    margin: 3rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin: 2rem 1rem;
+  }
+}
+
+@keyframes arrow-animation {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(0.25rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@theme {
+  --color-custom-light-red: #f9ebec;
+  --color-custom-dark-red: #c33249;
+  --color-custom-purple: #6c64a8;
+  --color-custom-blue: #5492a0;
+}
+
