@@ -6,7 +6,7 @@ import gsap from "gsap";
 type HoverItem = {
   content: string;
   image: string;
-  imageCoords: string;
+   
   contentSize: string;
   contentPosition: string;
   bgImage: string;
@@ -19,7 +19,7 @@ export type CustomCardProps = {
   image: string;
   bgColor: string;
   imagePosition: "left" | "right";
-  imageCoords: string;
+ : string;
   hoverData?: HoverItem[];
 };
 
@@ -30,7 +30,7 @@ const CustomCards: React.FC<CustomCardProps> = ({
   image,
   bgColor,
   imagePosition,
-  imageCoords,
+  
   hoverData = [],
 }) => {
   const svgRef = useRef<HTMLDivElement | null>(null);
