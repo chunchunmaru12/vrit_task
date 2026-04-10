@@ -6,7 +6,7 @@ import gsap from "gsap";
 type HoverItem = {
   content: string;
   image: string;
-   
+  imageCoords: string;
   contentSize: string;
   contentPosition: string;
   bgImage: string;
@@ -19,7 +19,6 @@ export type CustomCardProps = {
   image: string;
   bgColor: string;
   imagePosition: "left" | "right";
- : string;
   hoverData?: HoverItem[];
 };
 
@@ -30,7 +29,6 @@ const CustomCards: React.FC<CustomCardProps> = ({
   image,
   bgColor,
   imagePosition,
-  
   hoverData = [],
 }) => {
   const svgRef = useRef<HTMLDivElement | null>(null);
@@ -70,7 +68,9 @@ const CustomCards: React.FC<CustomCardProps> = ({
   const handlePrevHover = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (!hoverData.length) return;
-    setCurrentHoverIndex((prev) => (prev - 1 + hoverData.length) % hoverData.length);
+    setCurrentHoverIndex(
+      (prev) => (prev - 1 + hoverData.length) % hoverData.length
+    );
   };
 
   const handleMouseOver = () => {
@@ -131,43 +131,57 @@ const CustomCards: React.FC<CustomCardProps> = ({
       onMouseEnter={handleMouseOver}
       onMouseLeave={handleMouseLeave}
     >
+      {/* DEFAULT CARD */}
       <Card
         ref={defaultRef}
         className="w-full max-w-[592px] min-h-[341px] !overflow-visible relative z-10"
         style={{ backgroundColor: bgColor }}
       >
+        {/* Floating Image */}
         <div
-  ref={svgRef}
-  className={`absolute top-24 z-10 ${
-  imagePosition === "left" ? "left-4" : "right-4"
-}`}
->
-  <img
-    src={image}
-    alt={title}
-    className="max-w-[210px] h-auto object-contain"
-  />
-</div>
+          ref={svgRef}
+          className={`absolute top-24 z-10 ${
+            imagePosition === "left" ? "left-4" : "right-4"
+          }`}
+        >
+          <img
+            src={image}
+            alt={title}
+            className="max-w-[210px] h-auto object-contain"
+          />
+        </div>
 
+        {/* TEXT CONTENT */}
         {imagePosition === "left" ? (
           <div className="w-full pr-8 py-8 text-right text-white relative z-20 flex flex-col justify-center h-full gap-8">
             <div className="flex flex-col gap-[10px]">
-              <h2 className="text-[32px] tracking-[0.05em] font-bold">{title}</h2>
-              {subTitle && <p className="text-[24px] font-medium">{subTitle}</p>}
+              <h2 className="text-[32px] tracking-[0.05em] font-bold">
+                {title}
+              </h2>
+              {subTitle && (
+                <p className="text-[24px] font-medium">{subTitle}</p>
+              )}
             </div>
-            <p className="text-[18px] pl-[206px] font-normal">{description}</p>
+            <p className="text-[18px] pl-[206px] font-normal">
+              {description}
+            </p>
           </div>
         ) : (
           <div className="w-full pl-8 py-8 text-left text-white relative z-20 flex flex-col justify-center h-full gap-8">
             <div className="flex flex-col gap-[10px]">
               <h2 className="text-[32px] font-bold">{title}</h2>
-              {subTitle && <p className="text-[24px] font-medium">{subTitle}</p>}
+              {subTitle && (
+                <p className="text-[24px] font-medium">{subTitle}</p>
+              )}
             </div>
-            <p className="text-[18px] pr-[206px] font-normal">{description}</p>
+            <p className="text-[18px] pr-[206px] font-normal">
+              {description}
+            </p>
           </div>
         )}
       </Card>
 
+      {/* HOVER CARD */}
       {hasHoverContent && currentHover && (
         <Card
           ref={hoverRef}
@@ -184,6 +198,7 @@ const CustomCards: React.FC<CustomCardProps> = ({
             {currentHover.content}
           </h2>
 
+          {/* LEFT BUTTON */}
           <div className="absolute left-4 top-1/2 -translate-y-1/2 z-30">
             <Button
               className="rounded-full w-10 h-10 bg-white text-black"
@@ -193,6 +208,7 @@ const CustomCards: React.FC<CustomCardProps> = ({
             </Button>
           </div>
 
+          {/* RIGHT BUTTON */}
           <div className="absolute right-4 top-1/2 -translate-y-1/2 z-30">
             <Button
               className="rounded-full w-10 h-10 bg-white text-black"
